@@ -1,0 +1,29 @@
+﻿<Window x:Class="SecureFileShareP2P.Views.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SecureFileShareP2P.Views"
+        mc:Ignorable="d"
+        Title="Secure File Share - Login" 
+        Height="300" Width="400"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="250">
+            <!-- Username Field -->
+            <TextBlock Text="Username" Margin="0 0 0 5"/>
+            <TextBox x:Name="UsernameTextBox" Height="25" Margin="0 0 0 10"/>
+
+            <!-- Password Field -->
+            <TextBlock Text="Password" Margin="0 0 0 5"/>
+            <PasswordBox x:Name="PasswordBox" Height="25" Margin="0 0 0 20"/>
+
+            <!-- Buttons -->
+            <Button x:Name="LoginButton" Content="Login" Height="30" Click="LoginButton_Click"/>
+            <Button x:Name="RegisterButton" Content="Register" Height="30" Margin="0 10 0 0" 
+                    Click="RegisterButton_Click"/>
+            <!--optional button for rsa test-->
+            <!--<Button x:Name="TestRSAButton" Content="Test RSA" Margin="0 10 0 0" Click="TestRSAButton_Click"/>-->
+        </StackPanel>
+    </Grid>
+</Window>
