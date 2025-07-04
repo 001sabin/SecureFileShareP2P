@@ -1,0 +1,55 @@
+﻿<Window x:Class="SecureFileShareP2P.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SecureFileShareP2P"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <!-- File Selection -->
+        <StackPanel Margin="10" VerticalAlignment="Top">
+            <Button Content="Select File" Click="SelectFile_Click" Width="100"/>
+            <TextBlock x:Name="SelectedFileText" Margin="0 5"/>
+
+            <!-- Receiver Settings -->
+            <TextBlock Text="Receiver Port:" Margin="0 10 0 0"/>
+            <TextBox x:Name="ReceiverPortBox" Text="12345" Width="100"/>
+            <Button Content="Start Receiver" Click="StartReceiver_Click" Width="100" Margin="0 5"/>
+
+            <!-- Sender Settings -->
+            <TextBlock Text="Receiver IP:" Margin="0 10 0 0"/>
+            <TextBox x:Name="ReceiverIPBox" Text="127.0.0.1" Width="120"/>
+            <Button Content="Send File" Click="SendFile_Click" Width="100" Margin="0 5"/>
+
+            <!-- Add this to MainWindow.xaml for testing -->
+            <Button Content="Test Encryption" Click="TestEncryption_Click" Margin="0 20"/>
+            
+            <ProgressBar x:Name="TransferProgress" Height="20" Margin="0 10"/>
+            <TextBlock x:Name="StatusText" TextAlignment="Center"/>
+
+            <Button Content="Scan for Peers" Click="ScanPeers_Click" Margin="0 5"/>
+            <!-- Add this near your Scan button -->
+            <Button x:Name="StartBroadcastButton" 
+Content="Broadcast My Presence" 
+Click="StartBroadcast_Click" 
+Margin="0,5"/>
+
+            <!-- Add this to your UI -->
+        
+            <TextBlock Text="Discovered Peers:" Margin="0 10"/>
+            <ListBox x:Name="PeerList"  SelectionChanged="PeerList_SelectionChanged" Height="100">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Username}" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding IP}" Foreground="Gray"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            
+    
+        </StackPanel>
+    </Grid>
+</Window>
