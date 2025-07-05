@@ -42,11 +42,14 @@ namespace SecureFileShareP2P.Views
         //}
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
+            string username = UsernameTextBox.Text; // <-- Get username
             if (AuthService.Login(UsernameTextBox.Text, PasswordBox.Password))
             {
                 MessageBox.Show("Login successful!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 // Proceed to main window
-                new MainWindow().Show();
+                // Pass the username to the MainWindow
+                var mainWindow = new MainWindow(username); // <-- MODIFIED
+                mainWindow.Show();
                 this.Close();
             }
             else

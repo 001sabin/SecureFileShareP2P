@@ -6,36 +6,36 @@
         xmlns:local="clr-namespace:SecureFileShareP2P"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <!-- File Selection -->
+    <Grid Margin="10">
+        <!-- File Selection --><!--
         <StackPanel Margin="10" VerticalAlignment="Top">
             <Button Content="Select File" Click="SelectFile_Click" Width="100"/>
             <TextBlock x:Name="SelectedFileText" Margin="0 5"/>
 
-            <!-- Receiver Settings -->
+            --><!-- Receiver Settings --><!--
             <TextBlock Text="Receiver Port:" Margin="0 10 0 0"/>
             <TextBox x:Name="ReceiverPortBox" Text="12345" Width="100"/>
             <Button Content="Start Receiver" Click="StartReceiver_Click" Width="100" Margin="0 5"/>
 
-            <!-- Sender Settings -->
+            --><!-- Sender Settings --><!--
             <TextBlock Text="Receiver IP:" Margin="0 10 0 0"/>
             <TextBox x:Name="ReceiverIPBox" Text="127.0.0.1" Width="120"/>
             <Button Content="Send File" Click="SendFile_Click" Width="100" Margin="0 5"/>
 
-            <!-- Add this to MainWindow.xaml for testing -->
+            --><!-- Add this to MainWindow.xaml for testing --><!--
             <Button Content="Test Encryption" Click="TestEncryption_Click" Margin="0 20"/>
             
             <ProgressBar x:Name="TransferProgress" Height="20" Margin="0 10"/>
             <TextBlock x:Name="StatusText" TextAlignment="Center"/>
 
             <Button Content="Scan for Peers" Click="ScanPeers_Click" Margin="0 5"/>
-            <!-- Add this near your Scan button -->
+            --><!-- Add this near your Scan button --><!--
             <Button x:Name="StartBroadcastButton" 
 Content="Broadcast My Presence" 
 Click="StartBroadcast_Click" 
 Margin="0,5"/>
 
-            <!-- Add this to your UI -->
+            --><!-- Add this to your UI --><!--
         
             <TextBlock Text="Discovered Peers:" Margin="0 10"/>
             <ListBox x:Name="PeerList"  SelectionChanged="PeerList_SelectionChanged" Height="100">
@@ -50,6 +50,73 @@ Margin="0,5"/>
             </ListBox>
             
     
-        </StackPanel>
-    </Grid>
+        </StackPanel>-->
+        
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Column 0: Actions -->
+            <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,10,0">
+                <!-- Receiver Settings -->
+                <GroupBox Header="Receiver Settings" Margin="0,0,0,10" Padding="5">
+                    <StackPanel>
+                        <TextBlock Text="My Listening Port:" Margin="0,0,0,5"/>
+                        <TextBox x:Name="ReceiverPortBox" Text="12345" Margin="0,0,0,5"/>
+                        <Button x:Name="StartReceiverButton" Content="1. Start Listening" Click="StartReceiver_Click" Margin="0,5,0,0"/>
+                        <Button x:Name="StartBroadcastButton" Content="2. Broadcast My Presence" Click="StartBroadcast_Click" Margin="0,5,0,0"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- Sender Settings -->
+                <GroupBox Header="Send File" Padding="5">
+                    <StackPanel>
+                        <Button Content="3. Select File to Send" Click="SelectFile_Click"/>
+                        <TextBlock x:Name="SelectedFileText" Margin="0,5" Text="No file selected." TextWrapping="Wrap" MinHeight="30"/>
+                        <TextBlock Text="Receiver IP:" Margin="0,5,0,0"/>
+                        <TextBox x:Name="ReceiverIPBox" Text="127.0.0.1" IsReadOnly="True" Background="#EEE"/>
+                        <Button Content="5. Send File to Selected Peer" Click="SendFile_Click" Margin="0,10,0,0"/>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+
+            <!-- Column 1: Peer Discovery -->
+            <GroupBox Grid.Row="0" Grid.Column="1" Header="Peer Discovery" Padding="5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="0" Content="4. Scan for Peers on Network" Click="ScanPeers_Click" Margin="0,0,0,5"/>
+                    <ListBox x:Name="PeerList" Grid.Row="1" SelectionChanged="PeerList_SelectionChanged">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="3">
+                                    <TextBlock Text="{Binding Username}" FontWeight="Bold" FontSize="14"/>
+                                    <TextBlock Text="{Binding IP}" Foreground="DarkSlateGray"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </GroupBox>
+
+            <!-- Bottom Row 1: Progress -->
+            <ProgressBar Grid.Row="1" Grid.ColumnSpan="2" x:Name="TransferProgress" Height="15" Margin="0,10,0,5"/>
+            <TextBlock Grid.Row="2" Grid.ColumnSpan="2" x:Name="StatusText" Text="Ready." TextAlignment="Center" FontWeight="Bold"/>
+
+            <!-- Add this for Tasks 1 and 5 -->
+            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="ResetUIButton" Content="Reset" Click="ResetUI_Click" Margin="0,0,10,0" Padding="10,2"/>
+                <Button x:Name="QuitButton" Content="Quit Application" Click="QuitButton_Click" Padding="10,2"/>
+            </StackPanel>
+        </Grid>
+
+
 </Window>
